@@ -15,7 +15,7 @@ def set_up(user_overrides: dict):
     starting_procedure_steps = []
     starting_procedure_steps.append(ManualGcode(
         text='\n;FLAVOR:Marlin\n;TIME:0\n;Filament used: 0m\n;Layer height: 0\n;MINX:0\n;MINY:0\n;MINZ:0'))
-    starting_procedure_steps.append(ManualGcode(text=';MAXX:220\n;MAXY:220\n;MAXZ:250\n'))
+    starting_procedure_steps.append(ManualGcode(text=';MAXX:220\n;MAXY:220\n;MAXZ:270\n'))
     starting_procedure_steps.append(ManualGcode(
         text='; Time to print!!!!!\n; GCode created with FullControl - tell us what you\'re printing!\n; info@fullcontrol.xyz or tag FullControlXYZ on Twitter/Instagram/LinkedIn/Reddit/TikTok \n'))
     starting_procedure_steps.append(PrinterCommand(id='home'))
@@ -34,20 +34,20 @@ def set_up(user_overrides: dict):
     starting_procedure_steps.append(ManualGcode(
         text='M221 S' + str(initialization_data["material_flow_percent"])+' ; set extrude factor override percentage'))
     starting_procedure_steps.append(Extruder(on=False))
-    starting_procedure_steps.append(Point(x=5, y=5, z=10))
-    starting_procedure_steps.append(StationaryExtrusion(volume=50, speed=250))
-    starting_procedure_steps.append(Printer(travel_speed=250))
-    starting_procedure_steps.append(Point(z=50))
+    # starting_procedure_steps.append(Point(x=5, y=5, z=10))
+    # starting_procedure_steps.append(StationaryExtrusion(volume=50, speed=250))
+    # starting_procedure_steps.append(Printer(travel_speed=250))
+    # starting_procedure_steps.append(Point(z=1))
     starting_procedure_steps.append(Printer(travel_speed=initialization_data["travel_speed"]))
-    starting_procedure_steps.append(Point(x=10.0, y=10.0, z=0.3))
-    starting_procedure_steps.append(Extruder(on=True))
+    # starting_procedure_steps.append(Point(x=10.0, y=10.0, z=0.3))
+    # starting_procedure_steps.append(Extruder(on=True))
     starting_procedure_steps.append(ManualGcode(text=';-----\n; END OF STARTING PROCEDURE\n;-----\n'))
 
     ending_procedure_steps = []
     ending_procedure_steps.append(ManualGcode(text='\n;-----\n; START OF ENDING PROCEDURE\n;-----'))
     ending_procedure_steps.append(PrinterCommand(id='retract'))
     ending_procedure_steps.append(ManualGcode(text='G91 ; relative coordinates'))
-    ending_procedure_steps.append(ManualGcode(text='G0 Z20 F8000 ; drop bed'))
+    # ending_procedure_steps.append(ManualGcode(text='G0 Z10 F8000 ; drop bed'))
     ending_procedure_steps.append(ManualGcode(text='G90 ; absolute coordinates'))
     ending_procedure_steps.append(Fan(speed_percent=0))
     ending_procedure_steps.append(Buildplate(temp=0, wait=False))
